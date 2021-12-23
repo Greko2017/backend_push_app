@@ -12,3 +12,11 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Review.objects.all().order_by('-id')
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all().order_by('-id')
+
+    serializer_class = EmployeeSerializer
+
+    def get_queryset(self):
+        return Employee.objects.all().order_by('-id')

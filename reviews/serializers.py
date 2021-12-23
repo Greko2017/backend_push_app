@@ -12,3 +12,19 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ('__all__')
         depth = 1
+
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = (
+            'id',
+            'email',
+            'first_name',
+            'username',
+            'last_name',
+            'groups',
+            'user_permissions',
+            'push_token',
+        )  #'username'
+        depth = 1
