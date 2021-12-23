@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-()=r@0j##f!ffh9p6gocbk+(xi7sx&m&j%f$3)irulu2hcgzkj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["backend_push_app.herokuapp.com"]
 
 
 # Application definition
@@ -85,20 +86,21 @@ WSGI_APPLICATION = 'backend_push_app.wsgi.application'
 # }
 DATABASES = {
 
-    'default': {
-
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': "push_notification_db",
+    #     'USER': 'openpg',
+    #     'PASSWORD': 'openpgpwd',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # },
+    "default": {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': "push_notification_db",
-
-        'USER': 'openpg',
-
-        'PASSWORD': 'openpgpwd',
-
-        'HOST': 'localhost',
-
+        'NAME': "ddrr0islcnv369",
+        'USER': 'owzrzciemcrvas',
+        'PASSWORD': '4c4971690a8a0bd0cb4d4c55f263f7ea550aa0379bf1b0ba5dcb6b0b63c394d2',
+        'HOST': 'ec2-52-44-50-220.compute-1.amazonaws.com',
         'PORT': '5432',
-
     }
 
 }
@@ -139,6 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -157,5 +160,8 @@ CLOUDINARY_STORAGE = {
 
 CLOUDINARY_URL="cloudinary://845794598956633:UeU7pMx-1BCHSf2n9R2vDqxF-ig@kenda-sarl"
 
+# deploy : https://www.youtube.com/watch?v=5d8AQFF0Ot0
 AUTH_USER_MODEL = "reviews.Employee" 
 # https://stackoverflow.com/questions/49189402/auth-user-groups-fields-e304-reverse-accessor-for-user-groups-clashes-with
+
+django_heroku.settings(locals())
