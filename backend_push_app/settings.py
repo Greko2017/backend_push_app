@@ -91,22 +91,22 @@ WSGI_APPLICATION = 'backend_push_app.wsgi.application'
 # }
 DATABASES = {
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "push_notification_db",
-        'USER': 'openpg',
-        'PASSWORD': 'openpgpwd',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    },
-    # "default": {
+    # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': "ddrr0islcnv369",
-    #     'USER': 'owzrzciemcrvas',
-    #     'PASSWORD': '4c4971690a8a0bd0cb4d4c55f263f7ea550aa0379bf1b0ba5dcb6b0b63c394d2',
-    #     'HOST': 'ec2-52-44-50-220.compute-1.amazonaws.com',
+    #     'NAME': "push_notification_db",
+    #     'USER': 'openpg',
+    #     'PASSWORD': 'openpgpwd',
+    #     'HOST': 'localhost',
     #     'PORT': '5432',
-    # }
+    # },
+    "default": {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "ddrr0islcnv369",
+        'USER': 'owzrzciemcrvas',
+        'PASSWORD': '4c4971690a8a0bd0cb4d4c55f263f7ea550aa0379bf1b0ba5dcb6b0b63c394d2',
+        'HOST': 'ec2-52-44-50-220.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 
 }
 
