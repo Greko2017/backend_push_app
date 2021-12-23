@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-()=r@0j##f!ffh9p6gocbk+(xi7sx&m&j%f$3)irulu2hcgzkj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["backend-push-app.herokuapp.com"]
+ALLOWED_HOSTS = ["backend-push-app.herokuapp.com","127.0.0.1","localhost"]
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+    'rest_framework',
     'cloudinary_storage',
     'cloudinary',
     'reviews'
@@ -46,8 +48,11 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -86,22 +91,22 @@ WSGI_APPLICATION = 'backend_push_app.wsgi.application'
 # }
 DATABASES = {
 
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': "push_notification_db",
-    #     'USER': 'openpg',
-    #     'PASSWORD': 'openpgpwd',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    # },
-    "default": {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "ddrr0islcnv369",
-        'USER': 'owzrzciemcrvas',
-        'PASSWORD': '4c4971690a8a0bd0cb4d4c55f263f7ea550aa0379bf1b0ba5dcb6b0b63c394d2',
-        'HOST': 'ec2-52-44-50-220.compute-1.amazonaws.com',
+        'NAME': "push_notification_db",
+        'USER': 'openpg',
+        'PASSWORD': 'openpgpwd',
+        'HOST': 'localhost',
         'PORT': '5432',
-    }
+    },
+    # "default": {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': "ddrr0islcnv369",
+    #     'USER': 'owzrzciemcrvas',
+    #     'PASSWORD': '4c4971690a8a0bd0cb4d4c55f263f7ea550aa0379bf1b0ba5dcb6b0b63c394d2',
+    #     'HOST': 'ec2-52-44-50-220.compute-1.amazonaws.com',
+    #     'PORT': '5432',
+    # }
 
 }
 
@@ -164,4 +169,15 @@ CLOUDINARY_URL="cloudinary://845794598956633:UeU7pMx-1BCHSf2n9R2vDqxF-ig@kenda-s
 AUTH_USER_MODEL = "reviews.Employee" 
 # https://stackoverflow.com/questions/49189402/auth-user-groups-fields-e304-reverse-accessor-for-user-groups-clashes-with
 
+# For development:
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:19006',
+#     'https://backend-push-app.herokuapp.com',
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ORIGIN_REGEXES = [
+#     r"^https://\w+\.example\.com$",
+# ]
+
+# https://pythonrepo.com/repo/adamchainz-django-cors-headers-python-django-utilities
 django_heroku.settings(locals())
