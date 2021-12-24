@@ -15,6 +15,7 @@ class Employee(AbstractUser):
     department = models.CharField(max_length=200)
     position = models.CharField(max_length=200)
     push_token = models.CharField(max_length=200)
+    push_status = models.IntegerField(choices=STATUS, default=1)
     # policy = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="employees", null=True, blank=True)
     
     
@@ -24,7 +25,6 @@ class Review(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     image = models.ImageField(upload_to="review_header_images/", blank=True)
     content = models.TextField()
-    status = models.IntegerField(choices=STATUS, default=1)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
     employees = models.ManyToManyField(Employee)

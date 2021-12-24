@@ -25,6 +25,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'last_name',
             'groups',
             'user_permissions',
+            'push_status',
             'push_token',
         )  #'username'
         depth = 1

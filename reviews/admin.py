@@ -3,9 +3,11 @@ from django.contrib import admin
 # Register your models here.
 from .models import * 
 
-@admin.action(description='Send Notifications to Employee')
+@admin.action(description='Notify employees')
 def send_notification(modeladmin, request, queryset):
-    queryset.update(status=2)
+    employees = queryset.employess
+    for employee in employees:
+        employee.update(push_status=2)
 
 
 # class EmployeeInline(admin.StackedInline):
@@ -14,8 +16,8 @@ def send_notification(modeladmin, request, queryset):
 
 class ReviewAdmin(admin.ModelAdmin):
     # inlines = [EmployeeInline]
-    list_display = ('title', 'slug', 'status','created_on')
-    list_filter = ("status",)
+    list_display = ('title', 'slug', 'created_on')
+    list_filter = ("slug",)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     actions = [send_notification]
