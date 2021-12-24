@@ -9,16 +9,14 @@ STATUS = (
     (2,"sent")
 )
 
+    
 # https://www.youtube.com/watch?v=m5O4sSVbzjw
-
 class Employee(AbstractUser):
-    department = models.CharField(max_length=200)
-    position = models.CharField(max_length=200)
-    push_token = models.CharField(max_length=200)
-    push_status = models.IntegerField(choices=STATUS, default=1)
+    department = models.CharField(max_length=200, null=True, blank=True)
+    position = models.CharField(max_length=200, null=True, blank=True)
+    push_token = models.CharField(max_length=200, null=True, blank=True)
     # policy = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="employees", null=True, blank=True)
-    
-    
+
 # Create your models here.
 class Review(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -30,3 +28,8 @@ class Review(models.Model):
     employees = models.ManyToManyField(Employee)
     def __str__(self):
         return self.title
+
+class Status(models.Model):
+    reviews = models.ForeignKey(Review, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.IntegerField(choices=STATUS, default=1)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True, blank=True)

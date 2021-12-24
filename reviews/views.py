@@ -20,3 +20,11 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Employee.objects.all().order_by('-id')
+        
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all().order_by('-id')
+
+    serializer_class = StatusSerializer
+
+    def get_queryset(self):
+        return Status.objects.all().order_by('-id')

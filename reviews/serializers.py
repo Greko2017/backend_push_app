@@ -25,7 +25,12 @@ class EmployeeSerializer(serializers.ModelSerializer):
             'last_name',
             'groups',
             'user_permissions',
-            'push_status',
             'push_token',
         )  #'username'
         depth = 1
+        
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ('__all__')
+        # depth = 1

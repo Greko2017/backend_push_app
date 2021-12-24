@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 
 router.register('review', ReviewViewSet, 'review')
 router.register('employee', EmployeeViewSet, 'employee')
+router.register('status', StatusViewSet, 'status')
 
 
 urlpatterns = router.urls
