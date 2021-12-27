@@ -7,6 +7,7 @@ from exponent_server_sdk import (
     PushServerError,
     PushTicketError,
 )
+
 from requests.exceptions import ConnectionError, HTTPError
 
 # Register your models here.
@@ -18,7 +19,12 @@ def send_notification(modeladmin, request, queryset):
     print('-- queryset', queryset)
     for qs in queryset:
         review = list(Review.objects.filter(id=qs.id).values())[0]
-        print('-- queryset', review)
+        employees = qs.employees.all()
+        for employee in employees:
+            print('-- employee', employee.push_token)
+            if employee.push_token is not None:
+                send_push_message(employee.push_token, "OverXLS", f"Please, read and confirm the Policy {review['title']}")
+        # print('-- user', request.user)
 
     #     for employee in :
     #         if (employee.push_token is not None):
@@ -68,10 +74,13 @@ admin.site.register(Status, StatusAdmin)
 
 # Basic arguments. You should extend this function with the push features you
 # want to use, or simply pass in a `PushMessage` object.
-def send_push_message(token, message, extra=None):
+# PushMessage(to=None, data=None, title=None, body='DRUG AND ALCOHOL POLICY', sound=None, ttl=None, expiration=None, priority=None, badge=None, category=None, display_in_foreground=None, channel_id=None, subtitle=None, mutable_content=None)
+def send_push_message(token, title, message, extra=None):
     try:
         response = PushClient().publish(
             PushMessage(to=token,
+                        title=title,
+                        sound='default',
                         body=message,
                         data=extra))
     except PushServerError as exc:
